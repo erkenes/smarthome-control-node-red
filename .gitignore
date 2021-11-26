@@ -1,0 +1,4 @@
+.idea/
+Data/node-red/*
+
+!Data/node-red/.gitkeep

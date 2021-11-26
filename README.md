@@ -1,2 +1,11 @@
 # smarthome-control-node-red
-Local smart home control center with node-red, mqtt-server and zigbee2mqtt.
+
+Start a Node-Red instance.
+
+## Usage
+
+Start the container with
+
+```shell
+docker-compose up -d --build nginx
+```

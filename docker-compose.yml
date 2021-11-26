@@ -1,0 +1,32 @@
+version: '3.5'
+
+services:
+  node-red:
+    image: nodered/node-red:latest
+    restart: always
+    environment:
+      TZ: "${TIMEZONE}"
+    volumes:
+      - ${ROOT_PATH}/Data/node-red:/data
+    networks:
+      - node-red-net
+
+  nginx:
+    build: ./Docker/nginx
+    links:
+      - node-red
+    environment:
+      NGINX_PORT: "${NGINX_PORT}"
+      VIRTUAL_HOST: "${VIRTUAL_HOST}"
+    command: /bin/sh -c "/run_nginx.sh"
+    restart: always
+    networks:
+      - node-red-net
+      - nginx-proxy
+
+networks:
+  nginx-proxy:
+    external: true
+    name: "nginx-proxy"
+  node-red-net:
+    driver: bridge
