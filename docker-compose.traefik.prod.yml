@@ -1,0 +1,9 @@
+version: '3.9'
+
+services:
+  nginx:
+    image: ghcr.io/erkenes/smarthome-control-node-red/nginx:latest
+    build: ./Docker/nginx/Dockerfile
+    environment:
+      NGINX_PORT: $NGINX_PORT
+    container_name: /bin/sh -c "/run_nginx.sh"

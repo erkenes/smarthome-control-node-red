@@ -1,0 +1,38 @@
+version: '3.9'
+
+services:
+  node-red:
+    image: nodered/node-red:latest-14
+    restart: always
+    environment:
+      TZ: $TIMEZONE
+    volumes:
+      - $ROOT_PATH/Data:/data
+    networks:
+      - node-red
+
+  nginx:
+    image: ghcr.io/erkenes/smarthome-control-node-red/nginx:latest
+    links:
+      - node-red
+    environment:
+      NGINX_PORT: $NGINX_PORT
+      VIRTUAL_HOST: $VIRTUAL_HOST
+    command: /bin/sh -c "/run_nginx.sh"
+    restart: always
+    stdin_open: true
+    tty: true
+    networks:
+      - node-red
+      - traefik-proxy
+    labels:
+      traefik.enable: true
+      traefik.http.routers.node-red.entrypoints: https
+      traefik.http.routers.node-red.rule: Host($TRAEFIK_HOSTS_RULE)
+
+networks:
+  node-red:
+    driver: bridge
+  traefik-proxy:
+    name: traefik-proxy
+    driver: bridge

@@ -1,4 +1,4 @@
-FROM nginx:1.21.4-alpine
+FROM nginx:1.23-alpine
 
 ADD default.conf.template /default.conf.template
 ADD run_nginx.sh /run_nginx.sh

@@ -1,4 +1,4 @@
-version: '3.5'
+version: '3.9'
 
 services:
   node-red:
@@ -13,7 +13,7 @@ services:
       - smart-home-control
 
   nginx:
-    build: ./Docker/nginx
+    build: ./Docker/nginx/Dockerfile
     links:
       - node-red
     environment:
