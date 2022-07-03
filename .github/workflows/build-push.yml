@@ -49,7 +49,7 @@ jobs:
         id: build-and-push-nginx
         uses: docker/build-push-action@ac9327eae2b366085ac7f6a2d02df8aa8ead720a
         with:
-          context: .
+          context: ./Docker/nginx/
           file: ./Docker/nginx/Dockerfile
           push: true
           tags: ${{ steps.meta-nginx.outputs.tags }}
